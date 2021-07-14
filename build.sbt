@@ -8,6 +8,7 @@ ThisBuild / scalaVersion := Scala213
 enablePlugins(ScalaJSPlugin)
 scalaJSUseMainModuleInitializer := true
 scalaJSLinkerConfig ~= (_.withModuleKind(ModuleKind.CommonJSModule))
+scalaJSStage in Global := FullOptStage
 
 val http4sV = "1.0-139-8a8323b-SNAPSHOT"
 val munitCatsEffectV = "1.0.5"

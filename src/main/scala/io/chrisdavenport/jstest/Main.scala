@@ -2,22 +2,20 @@ package io.chrisdavenport.jstest
 
 import cats.effect._
 import org.http4s._
+import org.http4s.client._
 import org.http4s.implicits._
-import org.http4s.ember.server.EmberServerBuilder
-
+import org.http4s.ember.client.EmberClientBuilder
+import cats.effect.std.Console
+import _root_.io.circe.Json
+// import org.http4s.circe._
 object Main extends IOApp {
 
   def run(args: List[String]): IO[ExitCode] = {
-    EmberServerBuilder.default[IO].withHttpApp(app).build.use(_ => IO.never).as(ExitCode.Success)
+    EmberClientBuilder.default[IO].build.use(c => 
+      getJoke(c).flatMap(Console[IO].println(_))  
+    ).as(ExitCode.Success)
   }
 
-  def app = {
-    import org.http4s.dsl.io._
-    HttpRoutes.of[IO]{
-      case GET -> Root / "foo" => Ok()
-      case GET -> Root / "bar" => Accepted()
-      case GET -> Root / "bad" => Forbidden()
-    }.orNotFound
-  }
+  def getJoke(client: Client[IO]): IO[Status] = client.status(Request[IO](Method.GET, uri"https://icanhazdadjoke.com/"))
 
 }
