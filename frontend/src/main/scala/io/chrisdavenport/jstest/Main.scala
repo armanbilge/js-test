@@ -49,9 +49,10 @@ object TutorialApp extends IOApp {
   def addClickedMessage(): Unit = {
     import cats.effect.unsafe.implicits.global
     client.expect[Json](Request[IO](Method.GET, uri"./foo"))
-      .flatMap(a => a.as[Foo].liftTo[IO])
-      .flatMap(foo => 
-        IO(appendPar(document.body, foo.toString()))
+      .flatMap(json => 
+        json.as[Foo].liftTo[IO].flatMap(foo => 
+          IO(appendPar(document.body, s"Decoded: ${foo.toString()} - Raw: ${json.noSpaces}"))
+        )
       ).unsafeRunAndForget()
     
   }
