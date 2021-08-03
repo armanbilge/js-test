@@ -42,7 +42,7 @@ lazy val frontend = project.in(file("frontend"))
       name := "js-test-server",
       libraryDependencies ++= Seq(
         "org.scala-js"                %%% "scalajs-dom" % "1.1.0",
-        "com.armanbilge"              %%% "http4s-fetch-client"        % http4sV,
+        "com.armanbilge"              %%% "http4s-dom-fetch-client"        % http4sV,
         "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
       ),
       Compile / crossTarget := (Compile / resourceManaged).value,
