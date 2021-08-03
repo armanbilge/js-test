@@ -6,12 +6,12 @@ val Scala213 = "2.13.6"
 ThisBuild / scalaVersion := Scala213
 
 enablePlugins(ScalaJSPlugin)
+enablePlugins(ScalaJSBundlerPlugin)
 scalaJSUseMainModuleInitializer := true
 scalaJSLinkerConfig ~= (_.withModuleKind(ModuleKind.CommonJSModule))
 
-val http4sV = "1.0-148-8da8898"
+val http4sV = "1.0-377-020cf9e"
 val munitCatsEffectV = "1.0.5"
-
 
 // No Publish
 ThisBuild / githubWorkflowBuild := Seq(WorkflowStep.Sbt(List("test")))
@@ -28,10 +28,11 @@ libraryDependencies ++= Seq(
 
 
   "com.armanbilge"              %%% "http4s-dsl"                 % http4sV,
-  "com.armanbilge"              %%% "http4s-ember-server"        % http4sV,
+  "com.armanbilge"              %%% "http4s-node-serverless"     % http4sV,
   "com.armanbilge"              %%% "http4s-ember-client"        % http4sV,
   "com.armanbilge"              %%% "http4s-circe"               % http4sV,
 
 
   "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
 )
+Compile / npmDependencies += "serverless-http" -> "2.7.0"

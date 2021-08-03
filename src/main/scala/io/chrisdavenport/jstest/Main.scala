@@ -1,14 +1,20 @@
 package io.chrisdavenport.jstest
 
 import cats.effect._
+import cats.effect.unsafe.implicits._
 import org.http4s._
 import org.http4s.implicits._
-import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.node.serverless.ServerlessApp
 
-object Main extends IOApp {
+import scala.scalajs.js
 
-  def run(args: List[String]): IO[ExitCode] = {
-    EmberServerBuilder.default[IO].withHttpApp(app).build.use(_ => IO.never).as(ExitCode.Success)
+object Main {
+
+  val awsLambdaAdapter = js.Dynamic.global.require("serverless-http")
+    .asInstanceOf[js.Function1[js.Any, js.Any]]
+
+  def main(args: Array[String]): Unit = {
+    js.Dynamic.global.lambdaHandler = awsLambdaAdapter(ServerlessApp.unsafeExportApp(app))
   }
 
   def app = {
