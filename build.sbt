@@ -5,7 +5,7 @@ val Scala213 = "2.13.6"
 // ThisBuild / crossScalaVersions := Seq("2.12.14", Scala213)
 ThisBuild / scalaVersion := Scala213
 
-val http4sV = "1.0-148-8da8898"
+val http4sV = "1.0-377-020cf9e"
 val munitCatsEffectV = "1.0.5"
 
 
@@ -42,7 +42,7 @@ lazy val frontend = project.in(file("frontend"))
       name := "js-test-server",
       libraryDependencies ++= Seq(
         "org.scala-js"                %%% "scalajs-dom" % "1.1.0",
-        "com.armanbilge"              %%% "http4s-fetch-client"        % http4sV,
+        "com.armanbilge"              %%% "http4s-dom-fetch-client"        % http4sV,
         "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
       ),
       Compile / crossTarget := (Compile / resourceManaged).value,

@@ -15,7 +15,7 @@ import org.http4s.implicits._
 
 object TutorialApp extends IOApp {
 
-  val client = org.http4s.fetchclient.FetchClient[IO]
+  val client = org.http4s.dom.FetchClient[IO]
 
   def run(args: List[String]): IO[ExitCode] = {
     document.addEventListener("DOMContentLoaded", { (e: dom.Event) =>
