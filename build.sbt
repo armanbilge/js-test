@@ -10,7 +10,7 @@ scalaJSUseMainModuleInitializer := true
 scalaJSLinkerConfig ~= (_.withModuleKind(ModuleKind.CommonJSModule))
 scalaJSStage in Global := FullOptStage
 
-val http4sV = "1.0-148-8da8898"
+val http4sV = "1.0-377-020cf9e"
 val munitCatsEffectV = "1.0.5"
 
 
