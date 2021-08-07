@@ -7,6 +7,7 @@ ThisBuild / scalaVersion := Scala213
 
 enablePlugins(ScalaJSPlugin)
 enablePlugins(ScalaJSBundlerPlugin)
+scalaJSUseMainModuleInitializer := true
 scalaJSLinkerConfig ~= (_.withModuleKind(ModuleKind.CommonJSModule))
 
 val http4sV = "1.0.0-M24"

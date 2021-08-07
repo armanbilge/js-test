@@ -8,7 +8,6 @@ import org.http4s.node.serverless.ServerlessApp
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
-import scala.scalajs.js.annotation.JSExportTopLevel
 
 object Main {
 
@@ -16,10 +15,8 @@ object Main {
   @js.native
   val awsLambdaAdapter: js.Function1[js.Any, js.Any] = js.native
 
-  @JSExportTopLevel("lambdaHandler")
-  val lambdaHandler = awsLambdaAdapter(ServerlessApp.unsafeExportApp(app))
-
-  def main(args: Array[String]): Unit = ()
+  def main(args: Array[String]): Unit =
+    js.Dynamic.global.exports.lambdaHandler = awsLambdaAdapter(ServerlessApp.unsafeExportApp(app))
 
   def app = {
     import org.http4s.dsl.io._
