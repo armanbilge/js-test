@@ -15,14 +15,14 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: target/scala-2.13/scalajs-bundler/main
-      Handler: app.lambdaHandler
+      Handler: js-test-opt.lambdaHandler
       Runtime: nodejs14.x
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /hello/{proxy+}
+            Method: any
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
