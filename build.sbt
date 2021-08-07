@@ -5,7 +5,7 @@ val Scala213 = "2.13.6"
 // ThisBuild / crossScalaVersions := Seq("2.12.14", Scala213)
 ThisBuild / scalaVersion := Scala213
 
-val http4sV = "1.0-377-020cf9e"
+val http4sV = "1.0.0-M24"
 val munitCatsEffectV = "1.0.5"
 
 
@@ -31,7 +31,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .settings(
     name := "js-test-shared",
     libraryDependencies ++= Seq(
-      "com.armanbilge"              %%% "http4s-circe"               % http4sV,
+      "org.http4s"              %%% "http4s-circe"               % http4sV,
     )
   ).jsConfigure(_.enablePlugins(ScalaJSWeb))
 
@@ -42,7 +42,7 @@ lazy val frontend = project.in(file("frontend"))
       name := "js-test-server",
       libraryDependencies ++= Seq(
         "org.scala-js"                %%% "scalajs-dom" % "1.1.0",
-        "com.armanbilge"              %%% "http4s-dom-fetch-client"        % http4sV,
+        "org.http4s"              %%% "http4s-dom-fetch-client"        % http4sV,
         "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
       ),
       Compile / crossTarget := (Compile / resourceManaged).value,
@@ -56,10 +56,10 @@ lazy val backend = project.in(file("backend"))
   .settings(
     name := "js-test-server",
     libraryDependencies ++= Seq(
-      "com.armanbilge"              %%% "http4s-dsl"                 % http4sV,
-      "com.armanbilge"              %%% "http4s-ember-server"        % http4sV,
-      "com.armanbilge"              %%% "http4s-ember-client"        % http4sV,
-      "com.armanbilge"              %%% "http4s-circe"               % http4sV,
+      "org.http4s"              %%% "http4s-dsl"                 % http4sV,
+      "org.http4s"              %%% "http4s-ember-server"        % http4sV,
+      "org.http4s"              %%% "http4s-ember-client"        % http4sV,
+      "org.http4s"              %%% "http4s-circe"               % http4sV,
       "ch.qos.logback"        % "logback-classic"              % "1.2.3",
       // "org.reflections" % "reflections" % "0.9.12", - For Debugging Resource Locations
       "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
