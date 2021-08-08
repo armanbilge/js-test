@@ -21,9 +21,9 @@ object Main {
   def app = {
     import org.http4s.dsl.io._
     HttpRoutes.of[IO]{
-      case GET -> Root / "foo" => Ok()
-      case GET -> Root / "bar" => Accepted()
-      case GET -> Root / "bad" => Forbidden()
+      case GET -> Root / "hello" / "foo" => Ok()
+      case GET -> Root / "hello" / "bar" => Accepted()
+      case GET -> Root / "hello" / "bad" => Forbidden()
     }.orNotFound
   }
 
