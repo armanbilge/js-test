@@ -20,6 +20,8 @@ ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 ThisBuild / githubWorkflowPublishPreamble := Seq()
 ThisBuild / githubWorkflowTargetTags := Seq()
 
+lazy val packageLambda = taskKey[Unit]("Packages the lambda for testing/deploying via sam")
+packageLambda := (Compile / fullOptJS).dependsOn(Compile / npmInstallDependencies).value
 
 // Projects
 name := "js-test"
